@@ -14,11 +14,15 @@ public class FlyData {
     private Boolean enabled;
     @Getter
     @Setter
+    private Float flySpeed = 0.1f;
+    @Getter
+    @Setter
     private Integer remainingTime;
 
-    public FlyData(UUID userId, Boolean enabled, Integer remainingTime) {
+    public FlyData(UUID userId, Boolean enabled, Float flySpeed, Integer remainingTime) {
         this.userId = userId;
         this.enabled = enabled;
+        this.flySpeed = flySpeed;
         this.remainingTime = remainingTime;
     }
 

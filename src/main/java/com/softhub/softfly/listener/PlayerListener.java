@@ -18,6 +18,7 @@ public class PlayerListener implements Listener {
         SimpleAsync.syncLater(() -> {
             StorageDataService.get(player.getUniqueId()).thenAccept(data -> {
                 if (data == null) return;
+                SimpleAsync.sync(() -> player.setFlySpeed(data.getFlySpeed()));
                 CachedDataService.set(player.getUniqueId(), data);
             });
         }, 5L);

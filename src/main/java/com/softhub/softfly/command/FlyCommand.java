@@ -56,8 +56,22 @@ public class FlyCommand {
         return true;
     }
 
+    @CommandExecutor(label = "속도", description = "타인의 플라이 속도을 설정합니다.", permission = "softfly.command.fly.speedset")
+    public boolean onSpeedSet(Player sender,
+                             @CommandParameter(name = "대상 플레이어", type = CommandParameter.ParamType.STRING, index = 1) String targetName,
+                             @CommandParameter(name = "속도", type = CommandParameter.ParamType.INTEGER, index = 2) Integer speed) {
+        if (speed < 1 || speed > 10) {
+            sender.sendMessage(MessageComponent.formatMessage(BukkitInitializer.getInstance().getConfig(), "range_fly_speed"));
+            return true;
+        }
+        float flySpeed = 0.1f + ((speed - 1) * 0.1f);
+        FlyManager.setSpeed(targetName, flySpeed);
+        sender.sendMessage(MessageComponent.formatMessage(BukkitInitializer.getInstance().getConfig(), "command_set_speed", targetName, speed));
+        return true;
+    }
+
     @CommandExecutor(label = "설정", description = "타인의 플라이 시간을 설정합니다.", permission = "softfly.command.fly.timeset")
-    public boolean onTimeSet(Player sender, 
+    public boolean onTimeSet(Player sender,
                              @CommandParameter(name = "대상 플레이어", type = CommandParameter.ParamType.STRING, index = 1) String targetName,
                              @CommandParameter(name = "시간", type = CommandParameter.ParamType.INTEGER, index = 2) Integer second) {
         FlyManager.setTime(targetName, second);

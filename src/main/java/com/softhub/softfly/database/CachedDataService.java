@@ -8,7 +8,7 @@ import java.util.UUID;
 public class CachedDataService {
 
     public static FlyData get(UUID userId) {
-        FlyData flyData = new FlyData(userId, false, 0);
+        FlyData flyData = new FlyData(userId, false, 0.1f, 0);
         if (CacheStorage.get("flydata", userId.toString()) instanceof FlyData) {
             flyData = (FlyData) CacheStorage.get("flydata", userId.toString());
         }

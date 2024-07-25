@@ -53,6 +53,37 @@ public class FlyManager {
         return future;
     }
 
+    public static CompletableFuture<Float> setSpeed(String userName, Float value) {
+        CompletableFuture<Float> future = new CompletableFuture<>();
+        SimpleAsync.async(() -> {
+            Player player = Bukkit.getPlayer(userName);
+            if (player != null) {
+                SimpleAsync.sync(() -> player.setFlySpeed(value));
+                FlyData flyData = CachedDataService.get(player.getUniqueId());
+                flyData.setFlySpeed(value);
+                future.complete(flyData.getFlySpeed());
+            } else {
+                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(userName);
+                if (offlinePlayer == null || !offlinePlayer.hasPlayedBefore()) {
+                    future.completeExceptionally(new RuntimeException("대상 유저를 찾을 수 없음"));
+                    return;
+                }
+                StorageDataService.get(offlinePlayer.getUniqueId()).thenAccept(flyData -> {
+                    if (flyData != null) {
+                        flyData.setFlySpeed(value);
+                        StorageDataService.set(flyData).thenRun(() -> future.complete(flyData.getFlySpeed()));
+                    } else {
+                        future.completeExceptionally(new RuntimeException("FlyData를 찾을 수 없음"));
+                    }
+                }).exceptionally(ex -> {
+                    future.completeExceptionally(ex);
+                    return null;
+                });
+            }
+        });
+        return future;
+    }
+
     public static void setTime(String userName, Integer value) {
         SimpleAsync.async(() -> {
             Player player = Bukkit.getPlayer(userName);
