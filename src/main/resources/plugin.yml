@@ -1,0 +1,7 @@
+name: SoftFly
+version: '${project.version}'
+main: com.softhub.softfly.BukkitInitializer
+api-version: '1.20'
+
+depend:
+  - SoftFramework

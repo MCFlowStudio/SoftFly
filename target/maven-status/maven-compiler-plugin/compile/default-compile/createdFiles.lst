@@ -1,0 +1,9 @@
+com\softhub\softfly\BukkitInitializer.class
+com\softhub\softfly\listener\PlayerListener.class
+com\softhub\softfly\command\FlyCommand.class
+com\softhub\softfly\FlyData.class
+com\softhub\softfly\database\CachedDataService.class
+com\softhub\softfly\task\FlyTask.class
+com\softhub\softfly\config\ConfigManager.class
+com\softhub\softfly\database\StorageDataService.class
+com\softhub\softfly\manager\FlyManager.class

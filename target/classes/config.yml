@@ -1,0 +1,16 @@
+settings:
+
+messages:
+  # 오류 메시지
+  command_error: '<red>오류가 발생헀습니다. (%1%)'
+  not_enough_time: '<red>비행 시간이 충분하지 않아 날 수 없습니다.'
+  expired_fly_time: '<red>비행 시간이 다 되었습니다. 비행이 비활성화됩니다.'
+  # 승인 메시지
+  fly_toggle_on: '<green>비행이 활성화되었습니다. 남은 시간: %1%'
+  fly_toggle_off: '<green>비행이 비활성화되었습니다. 남은 시간: %1%'
+  action_bar: '<gray>남은 플라이 시간: %1%'
+
+  command_get_time: '<green>%1%님의 남은 플라이 시간은 %2%입니다.'
+  command_set_time: '<green>%1%님의 플라이 시간을 %2%로 설정했습니다.'
+  command_add_time: '<green>%1%님에게 플라이 시간 %2%초를 지급했습니다. (남은 시간: %3%)'
+  command_remove_time: '<green>%1%님에게서 플라이 시간 %2%초를 차감했습니다. (남은 시간: %3%)'
