@@ -15,6 +15,7 @@
 	- /플라이 설정 <플레이어> <시간(초)>
 	- /플라이 지급 <플레이어> <시간(초)>
 	- /플라이 차감 <플레이어> <시간(초)>
+	- /플라이 속도 <플레이어> <속도>
 	- /플라이 리로드
 	
 ***
@@ -29,6 +30,8 @@
 		- softfly.command.fly.add
 	- /플라이 차감
 		- softfly.command.fly.remove
+	- /플라이 속도
+		- softfly.command.fly.speed
 	- /플라이 리로드
 		- softfly.command.fly.reload
 
