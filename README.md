@@ -1,5 +1,7 @@
 ## 플라이 플러그인
 
+!! SoftFramework 가 설치되어 있어야 작동합니다. [다운로드](https://github.com/MCFlowStudio/SoftFramework/releases/download/realases/SoftFramework.jar)
+
 ***
 
 ### 플러그인 지원
