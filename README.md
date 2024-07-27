@@ -2,6 +2,10 @@
 
 ***
 
+### SoftFramework 가 설치되어 있어야 작동합니다. [다운로드](https://github.com/MCFlowStudio/SoftFramework/releases/download/realases/SoftFramework.jar)
+
+***
+
 ### 플러그인 지원
 
 오류 제보, 아이디어 건의, 제작 요청은 [SoftHub 디스코드 서버](https://discord.gg/kk4UQstdY9) 를 이용해 주세요.
