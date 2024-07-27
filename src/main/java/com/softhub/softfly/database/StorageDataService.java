@@ -2,6 +2,7 @@ package com.softhub.softfly.database;
 
 import com.softhub.softfly.FlyData;
 import com.softhub.softframework.SoftFramework;
+import org.bukkit.Bukkit;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -19,8 +20,8 @@ public class StorageDataService {
         Float flySpeed = flyData.getFlySpeed();
         Integer time = flyData.getRemainingTime();
 
-        String selected = "user_id, enabled, flyspeed, time";
-        Object[] values = {uuid, enabled, flySpeed, time};
+        String selected = "enabled, flyspeed, time";
+        Object[] values = {enabled, flySpeed, time};
 
         return SoftFramework.getDatabaseManager().set(selected, values, "user_id", "=", uuid, table);
     }
@@ -32,8 +33,8 @@ public class StorageDataService {
         Float flySpeed = flyData.getFlySpeed();
         Integer time = flyData.getRemainingTime();
 
-        String selected = "user_id, enabled, flyspeed, time";
-        Object[] values = {uuid, enabled, flySpeed, time};
+        String selected = "enabled, flyspeed, time";
+        Object[] values = {enabled, flySpeed, time};
 
         SoftFramework.getDatabaseManager().setSync(selected, values, "user_id", "=", uuid, table);
     }
@@ -49,7 +50,7 @@ public class StorageDataService {
         return SoftFramework.getDatabaseManager()
                 .getMultipleColumnsList(selectedColumns, table, column, logicGate, data, rs -> {
                     Boolean enabled = Boolean.parseBoolean(rs.getString("enabled"));
-                    Float flySpeed = rs.getFloat("time");
+                    Float flySpeed = rs.getFloat("flyspeed");
                     Integer remainingTime = rs.getInt("time");
                     return new FlyData(userId, enabled, flySpeed, remainingTime);
                 })

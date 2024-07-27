@@ -11,12 +11,13 @@ import com.softhub.softframework.command.CommandHelp;
 import com.softhub.softframework.command.CommandParameter;
 import com.softhub.softframework.config.convert.MessageComponent;
 import net.kyori.adventure.text.Component;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @Command(name = "플라이", aliases = "fly", description = "플라이 명령어입니다.", permission = "softfly.command.fly")
 public class FlyCommand {
 
-    @CommandHelp
+    @CommandHelp(consoleAvailable = false)
     public boolean onToggle(Player sender) {
         FlyData flyData = CachedDataService.get(sender.getUniqueId());
         int remainingTime = flyData.getRemainingTime();
@@ -45,7 +46,7 @@ public class FlyCommand {
 
 
     @CommandExecutor(label = "확인", description = "타인의 플라이 시간을 확인합니다.", permission = "softfly.command.fly.timeget")
-    public boolean onTimeGet(Player sender, @CommandParameter(name = "대상 플레이어", type = CommandParameter.ParamType.STRING, index = 1) String targetName) {
+    public boolean onTimeGet(CommandSender sender, @CommandParameter(name = "대상 플레이어", type = CommandParameter.ParamType.STRING, index = 1) String targetName) {
         FlyManager.getTime(targetName).thenAccept(flyTime -> {
             String formatTime = MessageComponent.formatTime(flyTime);
             sender.sendMessage(MessageComponent.formatMessage(BukkitInitializer.getInstance().getConfig(), "command_get_time", targetName, formatTime));
@@ -57,7 +58,7 @@ public class FlyCommand {
     }
 
     @CommandExecutor(label = "속도", description = "타인의 플라이 속도을 설정합니다.", permission = "softfly.command.fly.speedset")
-    public boolean onSpeedSet(Player sender,
+    public boolean onSpeedSet(CommandSender sender,
                              @CommandParameter(name = "대상 플레이어", type = CommandParameter.ParamType.STRING, index = 1) String targetName,
                              @CommandParameter(name = "속도", type = CommandParameter.ParamType.INTEGER, index = 2) Integer speed) {
         if (speed < 1 || speed > 10) {
@@ -71,7 +72,7 @@ public class FlyCommand {
     }
 
     @CommandExecutor(label = "설정", description = "타인의 플라이 시간을 설정합니다.", permission = "softfly.command.fly.timeset")
-    public boolean onTimeSet(Player sender,
+    public boolean onTimeSet(CommandSender sender,
                              @CommandParameter(name = "대상 플레이어", type = CommandParameter.ParamType.STRING, index = 1) String targetName,
                              @CommandParameter(name = "시간", type = CommandParameter.ParamType.INTEGER, index = 2) Integer second) {
         FlyManager.setTime(targetName, second);
@@ -81,7 +82,7 @@ public class FlyCommand {
     }
 
     @CommandExecutor(label = "지급", description = "타인의 플라이 시간을 추가합니다.", permission = "softfly.command.fly.timeadd")
-    public boolean onTimeAdd(Player sender, 
+    public boolean onTimeAdd(CommandSender sender,
                              @CommandParameter(name = "대상 플레이어", type = CommandParameter.ParamType.STRING, index = 1) String targetName,
                              @CommandParameter(name = "시간", type = CommandParameter.ParamType.INTEGER, index = 2) Integer second) {
         FlyManager.addTime(targetName, second).thenAccept(flyTime -> {
@@ -95,7 +96,7 @@ public class FlyCommand {
     }
 
     @CommandExecutor(label = "차감", description = "타인의 플라이 시간을 차감합니다.", permission = "softfly.command.fly.timeremove")
-    public boolean onTimeRemove(Player sender,
+    public boolean onTimeRemove(CommandSender sender,
                                 @CommandParameter(name = "대상 플레이어", type = CommandParameter.ParamType.STRING, index = 1) String targetName,
                                 @CommandParameter(name = "시간", type = CommandParameter.ParamType.INTEGER, index = 2) Integer second) {
         FlyManager.removeTime(targetName, second).thenAccept(flyTime -> {
@@ -109,7 +110,7 @@ public class FlyCommand {
     }
 
     @CommandExecutor(label = "리로드", description = "플러그인 설정을 다시 불러옵니다.", permission = "softfly.command.fly.reload")
-    public boolean onReload(Player sender) {
+    public boolean onReload(CommandSender sender) {
         ConfigManager.init();
         sender.sendMessage("플러그인 설정을 다시 불러왔습니다.");
         return true;

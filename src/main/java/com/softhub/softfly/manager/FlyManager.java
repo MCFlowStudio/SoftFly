@@ -52,7 +52,6 @@ public class FlyManager {
         });
         return future;
     }
-
     public static CompletableFuture<Float> setSpeed(String userName, Float value) {
         CompletableFuture<Float> future = new CompletableFuture<>();
         SimpleAsync.async(() -> {
